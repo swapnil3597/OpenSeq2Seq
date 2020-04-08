@@ -17,9 +17,9 @@ from ctc_decoders import Scorer, BeamDecoder
 
 
 # Define the command line arguments that one would pass to run.py here
-MODEL_PARAMS = ["--config_file=models/Jasper-Mini-for-Jetson/config_infer_stream.py",
-                "--mode=interactive_infer",
-                "--logdir=models/Jasper-Mini-for-Jetson/",
+MODEL_PARAMS = ["--config_file=example_configs/speech2text/jasper10x5_LibriSpeech_nvgrad_masks.py",
+                "--mode=infer",
+                "--logdir=../checkpoint/",
                 "--batch_size_per_gpu=1",
                 "--num_gpus=1",
                 "--use_horovod=False",
