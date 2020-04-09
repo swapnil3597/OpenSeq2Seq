@@ -239,18 +239,20 @@ def restore_and_get_results(model, checkpoint, mode):
       else:
         saver = tf.train.Saver()
         saver.restore(sess, checkpoint)
+    start = time.time()
     results_per_batch = get_results_for_epoch(
         model, sess, mode=mode, compute_loss=False, verbose=True,
     )
-  return results_per_batch
+  return results_per_batch, time.time() - start
 
 
 def infer(model, checkpoint, output_file):
-  results_per_batch = restore_and_get_results(model, checkpoint, mode="infer")
-  print('>>>>'*10, results_per_batch)
+  results_per_batch, inference_time = \
+      restore_and_get_results(model, checkpoint, mode="infer")
   if not model.on_horovod or model.hvd.rank() == 0:
     model.finalize_inference(results_per_batch, output_file)
     deco_print("Finished inference")
+  print('\n***Inference Time:', inference_time)
 
 def evaluate(model, checkpoint):
   results_per_batch = restore_and_get_results(model, checkpoint, mode="eval")
