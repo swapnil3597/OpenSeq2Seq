@@ -7,3 +7,4 @@ python run.py \
  --decoder_params/use_language_model=False \
  --infer_output_file=model_output.pickle
 
+python3 calculate_wer.py
