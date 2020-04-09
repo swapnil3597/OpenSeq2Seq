@@ -1,7 +1,8 @@
-from frame_asr import FrameASR
+# from frame_asr import FrameASR
 import numpy as np
 import pyaudio as pa
 import time
+import pickle
 
 CHANNELS = 1
 RATE = 16000
@@ -19,13 +20,19 @@ print('Please type input device ID:')
 dev_idx = int(input())
 
 
-asr = FrameASR()
+# asr = FrameASR()
 print('Initialization was successful')
 
+data_list = []
 
 def callback(in_data, frame_count, time_info, status):
     signal = np.frombuffer(in_data, dtype=np.int16)
-    pred = asr.transcribe(signal)
+    print(len(signal))
+    data_list.append(signal)
+    if len(data_list) == 20:
+        pickle.dump(data_list, open('data_list_demo_streaming.pickle', 'wb'))
+        print('Pickle File created ...')
+    pred = 'a'#asr.transcribe(signal)
     if len(pred.strip()):
         print('"{}"'.format(pred))
     return (in_data, pa.paContinue)
