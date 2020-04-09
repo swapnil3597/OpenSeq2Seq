@@ -13,7 +13,7 @@ def main():
   asr = FrameASR()
   data_list = pickle.load(open('data_list.pickle', 'rb'))
   for signal in data_list:
-    pred = asr.transcribe(signal)
+    pred = asr.transcribe(signal[:3200])
     if len(pred.strip()):
       print('"{}"'.format(pred))
 
