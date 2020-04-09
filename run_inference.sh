@@ -1,3 +1,5 @@
+cp -r data/librispeech/ /data/
+
 python run.py \
  --mode=infer \
  --config="example_configs/speech2text/jasper10x5_LibriSpeech_nvgrad_masks.py" \
