@@ -128,7 +128,7 @@ def get_logits(data, labels):
     # convert NumPy array to dict format
     logits = {}
     for idx, line in enumerate(labels):
-      audio_filename = line
+      audio_filename = line[0]
       logits[audio_filename] = data[idx]
   else:
     logits = data['logits']
@@ -176,9 +176,9 @@ def evaluate_wer(logits, labels, vocab, decoder):
     
   empty_preds = 0
   for idx, line in enumerate(labels):
-    audio_filename = line
+    audio_filename = line[0]
     label = line[-1]
-    pred = decoder(logits.get(audio_filename), vocab)
+    pred = decoder(logits[audio_filename], vocab)
     dist = levenshtein(label.lower().split(), pred.lower().split())
     if pred=='':
       empty_preds += 1
@@ -198,8 +198,8 @@ vocab[-1] = '_'
 
 probs_batch = []
 for line in labels:
-  audio_filename = line
-  probs_batch.append(softmax(logits.get(audio_filename)))
+  audio_filename = line[0]
+  probs_batch.append(softmax(logits[audio_filename]))
 
 if args.mode == 'eval':
   wer, _ = evaluate_wer(logits, labels, vocab, greedy_decoder)
