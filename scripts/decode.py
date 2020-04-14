@@ -129,7 +129,7 @@ def get_logits(data, labels):
     logits = {}
     for idx, line in enumerate(labels):
       audio_filename = line
-      logits.get(audio_filename) = data[idx]
+      logits[audio_filename] = data[idx]
   else:
     logits = data['logits']
   return logits
