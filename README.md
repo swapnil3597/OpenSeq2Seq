@@ -16,6 +16,8 @@ building blocks for training encoder-decoder models for neural machine translati
 ## Documentation and installation instructions 
 https://nvidia.github.io/OpenSeq2Seq/
 
+# Instructions for running Inference from this forked Repository
+
 ## Features
 1. Models for:
    1. Neural Machine Translation
