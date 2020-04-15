@@ -18,6 +18,50 @@ https://nvidia.github.io/OpenSeq2Seq/
 
 # Instructions for running Inference from this forked Repository
 
+### Step 1: Docker setup
+First follow the step from [this](https://nvidia.github.io/OpenSeq2Seq/html/installation.html) link to run the container which is required to run the OpenSeq2Seq Toolkit. If you are using VM Instance make sure you are using GPU instance with P100 or V100.
+
+### Step 2: Keep docker running for development environment
+
+### Step 3:Installing OpenSeq2Seq for Speech Recognition
+Install requirements:
+```bash
+git clone https://github.com/swapnil3597/OpenSeq2Seq/
+cd OpenSeq2Seq
+pip install -r requirements.txt
+```
+Install CTC decoders:
+```bash
+bash scripts/install_decoders.sh
+python scripts/ctc_decoders_test.py
+```
+All these above intructions are also available [here](https://nvidia.github.io/OpenSeq2Seq/html/installation.html)
+
+### Step 4: Downloading Acoustic model and Language Model
+Find the links to download latest **Acoustic model** from [here](https://nvidia.github.io/OpenSeq2Seq/html/speech-recognition.html)
+
+To download from drive link follow these commands:
+```bash
+pip install gdown
+gdown https://drive.google.com/uc?id=12CQvNrTvf0cjTsKjbaWWvdaZb7RxWI6X&export=download # This is an example, use the latest drive link for Jasper checkpoint
+```
+
+To download the **Language model** follow these steps:
+```bash
+bash scripts/install_kenlm.sh
+bash scripts/download_lm.sh
+```
+After running this command a `language_model/` dir would be created containing the binary file for 4-gram ARPA language model.
+
+### Step 5: Running Inference:
+
+There are two ways to run inference:
+
+**1. With Greedy Decoder:** 
+
+
+
+
 ## Features
 1. Models for:
    1. Neural Machine Translation
