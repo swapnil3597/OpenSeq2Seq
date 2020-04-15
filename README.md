@@ -37,8 +37,8 @@ python scripts/ctc_decoders_test.py
 ```
 All these above intructions are also available [here](https://nvidia.github.io/OpenSeq2Seq/html/installation.html)
 
-### Step 4: Downloading Acoustic model and Language Model
-Find the links to download latest **Acoustic model** from [here](https://nvidia.github.io/OpenSeq2Seq/html/speech-recognition.html)
+### Step 4: Downloading Acoustic model(Jasper) and Language Model
+Find the links for latest **Acoustic model checkpoint and config file** from [here](https://nvidia.github.io/OpenSeq2Seq/html/speech-recognition.html)
 
 To download from drive link follow these commands:
 ```bash
@@ -55,12 +55,24 @@ After running this command a `language_model/` dir would be created containing t
 
 ### Step 5: Running Inference:
 
+First in `run_inference.sh` script make sure you provide the correct path for `--config` and `--logdir` for Acoustic model (Jasper). 
+
 There are two ways to run inference:
 
 **1. With Greedy Decoder:** 
-
-
-
+Make sure that in config file `"decoder_params"` section has `'infer_logits_to_pickle': False` line and that `"dataset_files"` field of `"infer_params"` section contains a target CSV file. Then run:
+```bash
+bash run_inference.sh # You will get desired output in model_output.pickle file
+```
+**1. With Language Model Rescoring:** 
+In the file `run_decoding.sh` provide the correct binary file path for language model in `--lm` and
+make sure that in config file `"decoder_params"` section has `'infer_logits_to_pickle': True` line and that `"dataset_files"` field of `"infer_params"` section contains a target CSV file. Then run:
+```bash
+bash run_inference.sh # You will get acoustic model logits in model_output.pickle file
+# To decode the logits run:
+bash run_decoding.sh
+# For --mode as 'infer' you will get output in --infer_output_file 'inference_output_lm.csv'
+```
 
 ## Features
 1. Models for:
