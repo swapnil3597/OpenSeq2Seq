@@ -5,4 +5,6 @@ python scripts/decode.py \
  --vocab="open_seq2seq/test_utils/toy_speech_data/vocab.txt" \
  --alpha=0.01 \
  --beta=0.01 \
- --beam_width=3
+ --beam_width=3 \
+ --mode 'infer' \
+ --infer_output_file 'inference_output_lm.csv'

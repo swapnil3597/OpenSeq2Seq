@@ -231,6 +231,7 @@ if args.mode == 'eval':
   print('BEST: alpha={:.2f}, beta={:.2f}, WER={:.4f}'.format(
         best_result['alpha'], best_result['beta'], best_result['wer']))
     
+  print(best_result)
   if args.dump_all_beams_to:
    with open(args.dump_all_beams_to, 'w') as f:
      for beam in best_result['beams']:
@@ -251,7 +252,7 @@ elif args.mode == 'infer':
     score, text = [v for v in zip(*res[idx])]
     infer_preds[idx, 0] = filename
     infer_preds[idx, 1] = text[0]
-    
+  print(infer_preds)  
   np.savetxt(args.infer_output_file, infer_preds, fmt='%s', delimiter=',',
              header='wav_filename,transcript')
 
