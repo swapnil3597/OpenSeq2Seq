@@ -42,7 +42,7 @@ Find the links for latest **Acoustic model checkpoint and config file** from [he
 
 To download from drive link follow these commands:
 ```bash
-pip install gdown
+pip3 install gdown
 gdown https://drive.google.com/uc?id=12CQvNrTvf0cjTsKjbaWWvdaZb7RxWI6X&export=download # This is an example, use the latest drive link for Jasper checkpoint
 ```
 
